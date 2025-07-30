@@ -1,94 +1,431 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>موقعي عن الحروب</title>
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>حربال - harbaal</title>
+
+  <!-- أيقونة الموقع -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+  <!-- بيانات Open Graph لتحسين عرض المشاركة -->
+  <meta property="og:title" content="حربال - harbaal" />
+  <meta property="og:description" content="واجهة رقمية لأحدث المستجدات في الميدان العسكري" />
+  <meta property="og:image" content="https://raw.githubusercontent.com/jule911/FGGYF/main/harbaal-preview.jpg" />
+  <meta property="og:url" content="https://jule911.github.io/FGGYF/" />
+
+  <!-- بيانات تويتر -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="حربال - harbaal" />
+  <meta name="twitter:description" content="واجهة رقمية لأحدث المستجدات في الميدان العسكري" />
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/jule911/FGGYF/main/harbaal-preview.jpg" />
+
+  <!-- خط عربي -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet" />
+
   <style>
+    :root {
+      --brown-dark: #3b2f2f;
+      --gold-bronze: #b17a2a;
+      --gold-bronze-light: #d2a93f;
+      --bg-gradient-start: #2e2a26;
+      --bg-gradient-end: #1e1b19;
+    }
+
     body {
-      background-color: #1a1a1a;
-      color: #d2a93f;
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      padding: 20px;
+      font-family: 'Cairo', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      color: var(--gold-bronze-light);
+      background:
+        linear-gradient(135deg, rgba(59,47,47,0.7), rgba(30,27,25,0.7)),
+        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      background-size: cover;
     }
-    h1, h2, h3 {
-      color: #b17a2a;
-      text-align: center;
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      opacity: 0.8;
+      pointer-events: none;
+      z-index: -1;
     }
+
     .container {
       max-width: 900px;
-      margin: auto;
-      background: #2e2e2e;
-      padding: 20px;
+      margin: 50px auto;
+      background: #3b2f2fdd;
+      border: 3px solid var(--gold-bronze);
       border-radius: 12px;
-      box-shadow: 0 0 15px #000000aa;
+      padding: 30px 40px;
+      box-shadow: 0 0 25px var(--gold-bronze-light);
     }
-    .war-article {
-      margin-top: 30px;
-      background-color: #4b3f35dd;
-      padding: 15px;
-      border-radius: 10px;
-      border: 2px solid #b17a2a;
-      box-shadow: 0 0 10px #d2a93f;
+
+    /* شعار الموقع */
+    .site-logo {
+      text-align: center;
+      margin-bottom: 20px;
     }
-    a {
-      color: #f5c26b;
+    .site-logo h1 {
+      font-size: 3rem;
+      margin: 0;
+      font-weight: 900;
+      color: var(--gold-bronze);
+      letter-spacing: 4px;
+      user-select: none;
+    }
+    .site-logo p {
+      margin: 0;
+      font-size: 1.2rem;
+      color: var(--gold-bronze-light);
+      font-weight: 600;
+      letter-spacing: 3px;
+      font-style: italic;
+      user-select: none;
+    }
+
+    h1, h2 {
+      color: var(--gold-bronze);
+      font-weight: 900;
+      text-align: center;
+      animation: zoomFadeIn 1.3s ease forwards;
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    h1 {
+      animation-delay: 0.2s;
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+    }
+    h2 {
+      animation-delay: 0.8s;
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+    }
+
+    @keyframes zoomFadeIn {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .search-box {
+      position: relative;
+      max-width: 500px;
+      margin: 0 auto 10px auto;
+    }
+
+    .search-box input[type="text"] {
+      width: 100%;
+      padding: 14px 50px 14px 20px;
+      border-radius: 30px;
+      border: 2px solid var(--gold-bronze);
+      background: #443b33;
+      color: var(--gold-bronze-light);
+      font-size: 1.1rem;
+      outline: none;
+      transition: border-color 0.3s ease;
+      letter-spacing: 1px;
+      box-shadow: 0 0 10px #6f5e2e inset;
+    }
+    .search-box input[type="text"]:focus {
+      border-color: var(--gold-bronze-light);
+      box-shadow: 0 0 15px var(--gold-bronze-light);
+    }
+
+    .search-box::after {
+      content: "🎯";
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.8rem;
+      color: var(--gold-bronze);
+      pointer-events: none;
+      transition: color 0.3s ease;
+    }
+    .search-box input[type="text"]:focus + .search-box::after {
+      color: var(--gold-bronze-light);
+    }
+
+    .updates {
+      max-width: 500px;
+      margin: 0 auto 35px auto;
+      background: #4b3f35dd;
+      border: 2px solid var(--gold-bronze);
+      border-radius: 15px;
+      padding: 15px 20px;
+      box-shadow: 0 0 20px var(--gold-bronze-light);
+      color: var(--gold-bronze-light);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    .updates h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: var(--gold-bronze);
+      text-align: center;
+    }
+    .updates ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .updates ul li {
+      margin-bottom: 8px;
+    }
+
+    .comments-box {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #4b3f35dd;
+      border: 2px solid var(--gold-bronze);
+      border-radius: 15px;
+      box-shadow: 0 0 25px var(--gold-bronze-light);
+      padding: 25px 30px;
+      color: var(--gold-bronze-light);
+      font-size: 1.1rem;
+      line-height: 1.6;
+      min-height: 140px;
+      overflow-y: auto;
+    }
+
+    .comment {
+      background: #3c2f26cc;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      padding: 12px 18px;
+      box-shadow: inset 0 0 5px #a38334;
+      position: relative;
+      animation: fadeInComment 0.6s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInComment {
+      to { opacity: 1; }
+    }
+
+    .comment-form {
+      max-width: 700px;
+      margin: 25px auto 0 auto;
+      display: flex;
+      gap: 10px;
+      direction: rtl;
+    }
+
+    .comment-form input[type="text"] {
+      flex-grow: 1;
+      border-radius: 30px;
+      border: 2px solid var(--gold-bronze);
+      padding: 12px 20px;
+      font-size: 1.1rem;
+      background: #443b33;
+      color: var(--gold-bronze-light);
+      outline: none;
+      box-shadow: 0 0 10px #6f5e2e inset;
+    }
+    .comment-form input[type="text"]:focus {
+      border-color: var(--gold-bronze-light);
+      box-shadow: 0 0 15px var(--gold-bronze-light);
+    }
+
+    .comment-form button {
+      background: var(--gold-bronze);
+      color: #2a1f01;
+      font-weight: 700;
+      border: none;
+      border-radius: 30px;
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 0 12px #a6831a;
+      transition: background-color 0.3s ease;
+    }
+    .comment-form button:hover {
+      background-color: var(--gold-bronze-light);
+    }
+
+    button:active, input[type="text"]:active {
+      transform: scale(0.97);
+    }
+
+    .subscribe-box {
+      max-width: 700px;
+      margin: 35px auto 15px auto;
+      background: #4b3f35dd;
+      border: 2px solid var(--gold-bronze);
+      border-radius: 15px;
+      padding: 20px 30px;
+      box-shadow: 0 0 25px var(--gold-bronze-light);
+      color: var(--gold-bronze-light);
+      font-size: 1.1rem;
+    }
+    .subscribe-box h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      text-align: center;
+      color: var(--gold-bronze);
+    }
+    .subscribe-form {
+      display: flex;
+      gap: 15px;
+      direction: rtl;
+    }
+    .subscribe-form input[type="email"] {
+      flex-grow: 1;
+      border-radius: 30px;
+      border: 2px solid var(--gold-bronze);
+      padding: 12px 20px;
+      font-size: 1.1rem;
+      background: #443b33;
+      color: var(--gold-bronze-light);
+      outline: none;
+      box-shadow: 0 0 10px #6f5e2e inset;
+    }
+    .subscribe-form input[type="email"]:focus {
+      border-color: var(--gold-bronze-light);
+      box-shadow: 0 0 15px var(--gold-bronze-light);
+    }
+    .subscribe-form button {
+      background: var(--gold-bronze);
+      color: #2a1f01;
+      font-weight: 700;
+      border: none;
+      border-radius: 30px;
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 0 12px #a6831a;
+      transition: background-color 0.3s ease;
+    }
+    .subscribe-form button:hover {
+      background-color: var(--gold-bronze-light);
+    }
+
+    .subscribe-message {
+      margin-top: 12px;
+      text-align: center;
+      font-weight: 700;
+      color: #a0d468;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .subscribe-message.show {
+      opacity: 1;
     }
   </style>
 </head>
 <body>
+
   <div class="container">
-    <h1>الحروب الجارية في العالم - 2025</h1>
-    <p>
-      يشهد العالم حالياً صراعات عديدة تهدد الاستقرار وتؤدي إلى أزمات إنسانية كبيرة. فيما يلي أبرز هذه الحروب حتى منتصف 2025:
-    </p>
-
-    <div class="war-article">
-      <h3>1. حرب غزة – إسرائيل وحماس</h3>
-      <p>
-        الحرب التي بدأت في أكتوبر 2023 ما زالت مستمرة، وقد تسببت بمأساة إنسانية ضخمة في غزة، حيث يعاني السكان من المجاعة والحصار، وسط دمار واسع النطاق.
-        <br>
-        <a href="https://en.wikipedia.org/wiki/Gaza_war" target="_blank">مصدر</a>
-      </p>
+    <!-- شعار الموقع -->
+    <div class="site-logo">
+      <h1>حربال</h1>
+      <p>harbaal</p>
     </div>
 
-    <div class="war-article">
-      <h3>2. نزاع الهند وباكستان - كشمير</h3>
-      <p>
-        اشتد التوتر بين الدولتين النوويتين بعد هجوم في كشمير، وتصاعدت التحذيرات من مواجهة عسكرية مفتوحة.
-        <br>
-        <a href="https://en.wikipedia.org/wiki/2025_India%E2%80%93Pakistan_conflict" target="_blank">مصدر</a>
-      </p>
+    <h1>مرحباً بك في حربال - حيث تروى الحقيقة </h1>
+    <h2>واجهة رقمية لاخر مستجدات الميدان العسكري</h2>
+
+    <div class="search-box">
+      <input id="searchInput" type="text" placeholder="ابحث في الموقع... 🔍" autocomplete="off" />
     </div>
 
-    <div class="war-article">
-      <h3>3. أزمة الكونغو ورواندا</h3>
-      <p>
-        ميليشيا M23 المدعومة من رواندا سيطرت على مناطق رئيسية شرقي الكونغو، مما أدى إلى تصعيد عسكري وقطع العلاقات بين البلدين.
-        <br>
-        <a href="https://en.wikipedia.org/wiki/Democratic_Republic_of_the_Congo%E2%80%93Rwanda_conflict_%282022%E2%80%93present%29" target="_blank">مصدر</a>
-      </p>
+    <div class="updates">
+      <h3>مستجداتنا</h3>
+      <ul>
+        <li>إطلاق نسخة جديدة من الموقع بتاريخ 2025-08-01</li>
+        <li>تحديثات على نظام التعليقات لتحسين التجربة</li>
+        <li>إضافة قسم جديد لمشاركة الأخبار العسكرية</li>
+      </ul>
     </div>
 
-    <div class="war-article">
-      <h3>4. الحرب الأهلية في السودان</h3>
-      <p>
-        تتواصل الاشتباكات بين الجيش وقوات الدعم السريع، مع سقوط مئات الضحايا وتدمير مدن بأكملها في دارفور والخرطوم.
-        <br>
-        <a href="https://en.wikipedia.org/wiki/Sudanese_civil_war_%282023%E2%80%93present%29" target="_blank">مصدر</a>
-      </p>
+    <div class="subscribe-box">
+      <h3>اشترك لتصلك تحديثاتنا</h3>
+      <form id="subscribeForm" class="subscribe-form" autocomplete="off">
+        <input id="emailInput" type="email" placeholder="أدخل بريدك الإلكتروني..." required />
+        <button type="submit">اشتراك</button>
+      </form>
+      <div id="subscribeMessage" class="subscribe-message"></div>
     </div>
 
-    <div class="war-article">
-      <h3>5. نزاع تايلاند وكمبوديا</h3>
-      <p>
-        اشتبك الجيشان بسبب نزاع حدودي جديد، مما أسفر عن سقوط ضحايا ونزوح آلاف المدنيين من القرى القريبة من الحدود.
-        <br>
-        <a href="https://en.wikipedia.org/wiki/2025_Cambodia%E2%80%93Thailand_border_conflict" target="_blank">مصدر</a>
-      </p>
+    <div class="comments-box" id="commentsBox">
+      <p style="opacity:0.6; font-style: italic;">لا توجد تعليقات بعد، كن أول من يشارك رأيه!</p>
     </div>
+
+    <form id="commentForm" class="comment-form" autocomplete="off">
+      <input id="commentInput" type="text" placeholder="اكتب رأيك هنا..." required />
+      <button type="submit">إرسال</button>
+    </form>
   </div>
+
+  <audio id="tickSound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
+
+  <script>
+    const tickSound = document.getElementById('tickSound');
+    const searchInput = document.getElementById('searchInput');
+    const commentInput = document.getElementById('commentInput');
+    const commentForm = document.getElementById('commentForm');
+    const commentsBox = document.getElementById('commentsBox');
+
+    function playTick() {
+      tickSound.currentTime = 0;
+      tickSound.play().catch(() => {});
+    }
+
+    [searchInput, commentInput].forEach(input => {
+      input.addEventListener('keydown', () => playTick());
+      input.addEventListener('mousedown', () => playTick());
+    });
+
+    commentForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = commentInput.value.trim();
+      if(text.length === 0) return;
+
+      const noCommentsMsg = commentsBox.querySelector('p[style]');
+      if(noCommentsMsg) noCommentsMsg.remove();
+
+      const newComment = document.createElement('div');
+      newComment.classList.add('comment');
+      newComment.textContent = text;
+      commentsBox.prepend(newComment);
+
+      commentInput.value = '';
+    });
+
+    const subscribeForm = document.getElementById('subscribeForm');
+    const emailInput = document.getElementById('emailInput');
+    const subscribeMessage = document.getElementById('subscribeMessage');
+
+    subscribeForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = emailInput.value.trim();
+      if(!validateEmail(email)) {
+        showSubscribeMessage('يرجى إدخال بريد إلكتروني صحيح', true);
+        return;
+      }
+      showSubscribeMessage('تم الاشتراك بنجاح! شكراً لك.');
+      emailInput.value = '';
+    });
+
+    function showSubscribeMessage(msg, isError = false) {
+      subscribeMessage.textContent = msg;
+      subscribeMessage.style.color = isError ? '#e74c3c' : '#a0d468';
+      subscribeMessage.classList.add('show');
+      setTimeout(() => {
+        subscribeMessage.classList.remove('show');
+      }, 4000);
+    }
+
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email.toLowerCase());
+    }
+  </script>
+
 </body>
 </html>
